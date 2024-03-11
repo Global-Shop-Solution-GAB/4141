@@ -1,0 +1,655 @@
+Program.Sub.ScreenSU.Start
+gui.Form1..create
+gui.Form1..caption("AR Statement of Account")
+gui.Form1..size(4980,8520)
+gui.Form1..minx(0)
+gui.Form1..miny(0)
+gui.Form1..position(0,0)
+gui.Form1..event(unload,form1_unload)
+gui.Form1..alwaysontop(False)
+gui.Form1..fontname("Arial")
+gui.Form1..fontsize(8)
+gui.Form1..forecolor(0)
+gui.Form1..fontstyle(,,,,)
+gui.Form1..BackColor(-2147483633)
+gui.Form1..controlbox(True)
+gui.Form1..maxbutton(True)
+gui.Form1..minbutton(True)
+gui.Form1..mousepointer(0)
+gui.Form1..moveable(True)
+gui.Form1..sizeable(True)
+gui.Form1..ShowInTaskBar(True)
+gui.Form1..titlebar(True)
+gui.Form1.lblStartCust.create(label,"Starting Customer",True,1935,255,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblStartCust.defaultvalue("")
+gui.Form1.lblStartCust.controlgroup(0)
+gui.Form1.txtStartCust.create(textbox,"",True,1215,300,0,200,500,True,0,Arial,8,-2147483643,1)
+gui.Form1.txtStartCust.defaultvalue("")
+gui.Form1.txtStartCust.controlgroup(0)
+gui.Form1.cmdStart.create(button)
+gui.Form1.cmdStart.caption("^")
+gui.Form1.cmdStart.visible(True)
+gui.Form1.cmdStart.size(375,375)
+gui.Form1.cmdStart.zorder(0)
+gui.Form1.cmdStart.position(1510,470)
+gui.Form1.cmdStart.enabled(True)
+gui.Form1.cmdStart.fontname("Arial")
+gui.Form1.cmdStart.fontsize(8)
+gui.Form1.cmdStart.event(click,cmdstart_click)
+gui.Form1.cmdStart.defaultvalue("")
+gui.Form1.cmdStart.controlgroup(0)
+gui.Form1.lblEndCust.create(label,"Ending Customer",True,1935,255,1,2420,200,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblEndCust.defaultvalue("")
+gui.Form1.lblEndCust.controlgroup(0)
+gui.Form1.txtEndCust.create(textbox,"",True,1215,300,0,2390,500,True,0,Arial,8,-2147483643,1)
+gui.Form1.txtEndCust.defaultvalue("")
+gui.Form1.txtEndCust.controlgroup(0)
+gui.Form1.cmdEnd.create(button)
+gui.Form1.cmdEnd.caption("^")
+gui.Form1.cmdEnd.visible(True)
+gui.Form1.cmdEnd.size(375,375)
+gui.Form1.cmdEnd.zorder(0)
+gui.Form1.cmdEnd.position(3690,470)
+gui.Form1.cmdEnd.enabled(True)
+gui.Form1.cmdEnd.fontname("Arial")
+gui.Form1.cmdEnd.fontsize(8)
+gui.Form1.cmdEnd.event(click,cmdend_click)
+gui.Form1.cmdEnd.defaultvalue("")
+gui.Form1.cmdEnd.controlgroup(0)
+gui.Form1.cmdAdd.create(button)
+gui.Form1.cmdAdd.caption("Add")
+gui.Form1.cmdAdd.visible(True)
+gui.Form1.cmdAdd.size(855,375)
+gui.Form1.cmdAdd.zorder(0)
+gui.Form1.cmdAdd.position(200,1375)
+gui.Form1.cmdAdd.enabled(True)
+gui.Form1.cmdAdd.fontname("Arial")
+gui.Form1.cmdAdd.fontsize(8)
+gui.Form1.cmdAdd.event(click,cmdadd_click)
+gui.Form1.cmdAdd.defaultvalue("")
+gui.Form1.cmdAdd.controlgroup(0)
+gui.Form1.chkAll.create(checkbox)
+gui.Form1.chkAll.caption("All")
+gui.Form1.chkAll.visible(True)
+gui.Form1.chkAll.size(900,255)
+gui.Form1.chkAll.zorder(0)
+gui.Form1.chkAll.position(200,930)
+gui.Form1.chkAll.enabled(True)
+gui.Form1.chkAll.alignment(0)
+gui.Form1.chkAll.fontname("Arial")
+gui.Form1.chkAll.fontsize(8)
+gui.Form1.chkAll.event(click,chkall_click)
+gui.Form1.chkAll.defaultvalue("")
+gui.Form1.chkAll.controlgroup(0)
+gui.Form1.gsfgCust.create(gsflexgrid)
+gui.Form1.gsfgCust.FixedRows(0)
+gui.Form1.gsfgCust.FixedCols(0)
+gui.Form1.gsfgCust.visible(True)
+gui.Form1.gsfgCust.size(4485,5250)
+gui.Form1.gsfgCust.zorder(0)
+gui.Form1.gsfgCust.position(120,1900)
+gui.Form1.gsfgCust.enabled(True)
+gui.Form1.gsfgCust.event(commandclick,gsfgcust_commandclick)
+gui.Form1.cmdPrint.create(button)
+gui.Form1.cmdPrint.caption("Print")
+gui.Form1.cmdPrint.visible(True)
+gui.Form1.cmdPrint.size(855,375)
+gui.Form1.cmdPrint.zorder(0)
+gui.Form1.cmdPrint.position(200,7400)
+gui.Form1.cmdPrint.enabled(True)
+gui.Form1.cmdPrint.fontname("Arial")
+gui.Form1.cmdPrint.fontsize(8)
+gui.Form1.cmdPrint.event(click,cmdprint_click)
+gui.Form1.cmdPrint.defaultvalue("")
+gui.Form1.cmdPrint.controlgroup(0)
+gui.Form1.lblAging.create(label,"Aging Date",True,1935,255,1,2390,1100,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblAging.defaultvalue("")
+gui.Form1.lblAging.controlgroup(0)
+gui.Form1.dtpAge.create(datepicker)
+gui.Form1.dtpAge.visible(True)
+gui.Form1.dtpAge.size(1935,285)
+gui.Form1.dtpAge.zorder(0)
+gui.Form1.dtpAge.position(2390,1375)
+gui.Form1.dtpAge.enabled(True)
+gui.Form1.dtpAge.checkbox(False)
+gui.Form1.dtpAge.defaultvalue("")
+gui.Form1.dtpAge.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uReport.Define("fOutstanding",Float)
+Variable.UDT.uReport.Define("sName",String)
+Variable.UDT.uReport.Define("sAddress1",String)
+Variable.UDT.uReport.Define("sAddress2",String)
+Variable.UDT.uReport.Define("sCity",String)
+Variable.UDT.uReport.Define("sState",String)
+Variable.UDT.uReport.Define("sZip",String)
+Variable.UDT.uReport.Define("sAttn",String)
+Variable.UDT.uReport.Define("sPhone",String)
+Variable.UDT.uReport.Define("sFax",String)
+Variable.UDT.uReport.Define("iBIRunID",Long)
+Variable.UDT.uReport.Define("dAging",Date)
+Variable.UDT.uReport.Define("dDate",Date,DATE_TRANSACTION)
+Variable.UDT.uReport.Define("sBatch",String,BATCH_CODE)
+Variable.UDT.uReport.Define("sCurrency",String,EXCHANGE_CURR)
+Variable.UDT.uReport.Define("sCustomer",String,CUSTOMER)
+Variable.UDT.uReport.Define("sInvoice",String,INVOICE)
+Variable.UDT.uReport.Define("sReference",String,REFERENCE)
+Variable.UDT.uReport.Define("sTerms",String,TERMS_CODE)
+Variable.UDT.uReport.Define("fAmount",Float,EXCHANGE_AMT)
+Variable.uGlobal.uReport.Declare("uReport")
+Variable.Global.iBIRunID.Declare(Long,0)
+Variable.Global.iBILogID.Declare(Long,0)
+Variable.UDT.uCust.Define("fOutsanding",Float)
+Variable.UDT.uCust.Define("sCust",String,Customer)
+Variable.UDT.uCust.Define("sInvoice",String,Invoice)
+Variable.uGlobal.uCust.Declare("uCust")
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+V.uGlobal.uReport.Redim(-1,-1)
+F.Intrinsic.Control.CallSub(Buildstyle)
+F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst","Delete GCG_4141_ARNo0")
+F.ODBC.conx!rst.Close
+
+Gui.Form1..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.cmdstart_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdstart_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+
+'Launch browser and if selection is made save to text boxes
+F.Intrinsic.UI.Browser(205,"conx",V.Local.sRet)
+F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"***CANCEL***")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	Gui.Form1.txtStartCust.Text(V.Local.sRet(0).Trim)
+	Gui.Form1.txtEndCust.Text(V.Local.sRet(0).Trim)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdstart_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdstart_click.end
+
+program.sub.cmdend_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdend_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+'Launch browser and fill in textbox is selection is made
+F.Intrinsic.UI.Browser(205,"conx",V.Local.sRet)
+F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"***CANCEL***")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	Gui.Form1.txtEndCust.Text(V.Local.sRet(0).Trim)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdend_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdend_click.end
+
+program.sub.cmdadd_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdadd_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.iRowCount.Declare(Long)
+
+'Get number of rows
+V.Local.iRowCount.Set(V.Screen.Form1!gsfgCust.Rows)
+'Ordinal of bottom row
+F.Intrinsic.Math.Sub(V.Local.iRowCount,1,V.Local.iRow)
+'Make sure the starting customer text box has a value
+F.Intrinsic.Control.If(V.Screen.Form1!txtStartCust.Text,!=,"")
+	'Add Customer numbers to the Flexgrid
+	Gui.Form1.gsfgCust.TextMatrix(0,V.Local.iRow,V.Screen.Form1!txtStartCust.Text)
+	Gui.Form1.gsfgCust.TextMatrix(1,V.Local.iRow,V.Screen.Form1!txtEndCust.Text)
+	'Apply style
+	Gui.Form1.gsfgCust.ApplyStyle(V.Local.iRow,2)
+	'Add blank row to the Grid then apply style
+	F.Intrinsic.Math.Add(V.Local.iRowCount,1,V.Local.iRowCount)
+	Gui.Form1.gsfgCust.Rows(V.Local.iRowCount)
+	F.Intrinsic.Math.Sub(V.Local.iRowCount,1,V.Local.iRow)
+	Gui.Form1.gsfgCust.ApplyStyle(V.Local.iRow,3)
+	Gui.Form1.txtStartCust.Text("")
+	Gui.Form1.txtEndCust.Text("")
+	Gui.Form1.txtStartCust.SetFocus
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdadd_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdadd_click.end
+
+program.sub.cmdprint_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdprint_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sCase.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sSCust.Declare(String)
+V.Local.sECust.Declare(String)
+V.Local.sVal.Declare(String)
+V.Local.sParam.Declare(String)
+V.Local.sRef.Declare(String)
+V.Local.iRowCount.Declare(Long)
+V.Local.iCount.Declare(Long)
+'V.Local.iAmt.Declare(Float)
+V.Local.iNewAmt.Declare(Float)
+V.Local.iCredit.Declare(Float)
+V.Local.iDebit.Declare(Float)
+V.Local.dDate.Declare(Date)
+
+Function.Intrinsic.UI.InvokeWaitDialog("Please Wait. Data is being processed.","Loading Data")
+Gui.Form1..Visible(False)
+
+
+F.Global.BI.GetRunID(V.Global.iBIRunID)
+F.Global.BI.StartLogging(V.Global.iBIRunID,-1,-1,"",V.Global.iBILogID)
+'------------------------------Select Here---------------------------------------------------
+'If all is checked get all open invoices
+V.Local.sCase.Set(V.Screen.Form1!chkAll.Value)
+V.Local.dDate.Set(V.Screen.Form1!dtpAge.Value)
+'Due_Date or Date_Invoice?
+F.Intrinsic.Control.SelectCase(V.Local.sCase)
+
+	F.Intrinsic.Control.Case("1")
+		V.Local.sSql.Set("Select Distinct Invoice, Customer from v_AR_Open_Items where Date_Invoice <= '")
+		F.Intrinsic.String.Concat(V.Local.sSql,V.Local.dDate.PervasiveDate,"'",V.Local.sSql)
+		F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+		F.Intrinsic.Variable.LoadUDTFromRecordset("conx","rst","v.uGlobal.uCust",False)
+		F.ODBC.conx!rst.Close
+
+
+
+'Get open invoices for customers in grid
+	F.Intrinsic.Control.Case("0")
+		V.Local.iRowCount.Set(V.Screen.Form1!gsfgCust.Rows)
+		F.Intrinsic.Math.Sub(V.Local.iRowCount,2,V.Local.iRowCount)
+		F.Intrinsic.Control.For(V.Local.iCount,1,V.Local.iRowCount,1)
+			Gui.Form1.gsfgCust.GetTextMatrix(0,V.Local.iCount,V.Local.sSCust)
+			Gui.Form1.gsfgCust.GetTextMatrix(1,V.Local.iCount,V.Local.sECust)
+			F.Intrinsic.String.Concat("Select Distinct Invoice, Customer From v_AR_Open_Items where  Customer Between'",V.Local.sSCust.Trim,"' and '",V.Local.sECust.Trim,"'",V.Local.sSql)
+			F.Intrinsic.String.Concat(V.Local.sSql," and Date_Invoice <= '",V.Local.dDate.PervasiveDate,"'",V.Local.sSql)
+			F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+			F.Intrinsic.Variable.LoadUDTFromRecordset("conx","rst","v.uGlobal.uCust",True)
+			F.ODBC.conx!rst.Close
+		F.Intrinsic.Control.Next(V.Local.iCount)
+
+F.Intrinsic.Control.EndSelect
+
+'-----------------------------End Select Here-------------------------------------------------
+'loop through invoices and adjust them based on payments, credits, adjustments, and discounts applied to invoice
+'In AR a debit will increase and a Credit will decrease, so batch code 10, 13, 15, and 17 will be a debit
+'Batch Code 11, 12, 16 will be a credit.  Batch Code 10 is the Invoice.
+F.Intrinsic.Control.For(V.Local.iCount,0,V.uGlobal.uCust.UBound,1)
+'Going to try a new function here:
+'Function.Global.Accounting.GetARItemStatus(customer ID, Invoice number, string return)
+	F.Intrinsic.String.Concat(" Select Sum(Exchange_Amt) as Amt_Invoice From v_AR_Open_Items where Customer = '",V.uGlobal.uCust(V.Local.iCount)!sCust.Trim,"' and Invoice = '",V.uGlobal.uCust(v.Local.iCount)!sInvoice.Trim,"' and Date_Transaction <= '",V.Local.dDate.PervasiveDate,"'",V.Local.sSql)
+	F.Intrinsic.String.Concat(V.Local.sSql," and Batch_Code In ('10', '15', '13', '17')",V.Local.sSql)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+		V.Local.iCredit.Set(V.ODBC.conx!rst.FieldValTrim!Amt_Invoice)
+	F.Intrinsic.Control.Else
+		V.Local.iCredit.Set(0)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.conx!rst.Close
+	
+	F.Intrinsic.String.Concat(" Select Sum(Exchange_Amt) as Amt_Invoice from v_Ar_open_items where customer = '",V.uGlobal.uCust(v.Local.iCount)!sCust.Trim,"' and Invoice = '",V.uGlobal.uCust(v.Local.iCount)!sInvoice.Trim,"' and Date_Transaction <= '",V.Local.dDate.PervasiveDate,"'",V.Local.sSql)
+	F.Intrinsic.String.Concat(V.Local.sSql," and Batch_Code in ('11', '12', '16')",V.Local.sSql)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+		V.Local.iDebit.Set(V.ODBC.conx!rst.FieldValTrim!Amt_Invoice)
+	F.Intrinsic.Control.Else
+		V.Local.iDebit.Set(0)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.conx!rst.Close
+'	F.Intrinsic.Debug.Stop
+
+'	F.Intrinsic.Control.If(V.Local.iDebit,!=,0)
+'		V.uGlobal.uReport(v.Local.iCount)!fAmount.Set(V.Local.iDebit)
+'	F.Intrinsic.Control.Else
+'		V.uGlobal.uReport(v.Local.iCount)!fAmount.Set(V.Local.iCredit)
+'	F.Intrinsic.Control.endif
+
+	F.Intrinsic.Math.Add(V.Local.iCredit.Trim,V.Local.iDebit.Trim,V.Local.iNewAmt)
+	F.Intrinsic.Math.Round(V.Local.iNewAmt,2,V.Local.iNewAmt)
+	V.uGlobal.uCust(v.Local.iCount)!fOutsanding.Set(V.Local.iNewAmt)
+
+F.Intrinsic.Control.Next(V.Local.iCount)
+'Remove any invoices that net to 0
+F.Intrinsic.Variable.UDTMultiFlag(V.uGlobal.uCust!fOutsanding,0)
+F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uCust)
+
+'	F.Global.Accounting.GetARItemStatus(v.uGlobal.uReport(v.Local.iCount)!sCustomer.Trim,v.uGlobal.uReport(v.Local.iCount)!sInvoice.Trim,v.Local.sRet)
+'	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+'	F.Intrinsic.Control.If(V.Local.sRet,!=,"***NORETURN***")
+'
+'		F.Intrinsic.Math.Add(V.Local.sRet(0).Trim,V.Local.sRet(1).Trim,V.Local.iAmt)
+'		F.Intrinsic.Math.Round(V.Local.iAmt,2,V.Local.iAmt)
+'		V.uGlobal.uReport(v.Local.iCount)!fOutstanding.Set(V.Local.iAmt)
+''v.uGlobal.uReport(v.Local.iCount)!fOutstanding.Set(V.Local.sRet(2))
+''		F.Intrinsic.Math.Round(V.uGlobal.uReport(v.Local.iCount)!fOutstanding,2,V.uGlobal.uReport(v.Local.iCount)!fOutstanding)
+'		F.Intrinsic.Control.If(V.Local.sRet(0),!=,0)
+'			V.uGlobal.uReport(v.Local.iCount)!fAmount.Set(V.Local.sRet(0))
+'		F.Intrinsic.Control.Else
+'			V.uGlobal.uReport(v.Local.iCount)!fAmount.Set(V.Local.sRet(1))
+'		F.Intrinsic.Control.EndIf
+'	F.Intrinsic.Control.Else
+'		
+'	F.Intrinsic.Control.EndIf
+	'Get Invoice Date, Terms, Reference
+'	F.Intrinsic.String.Concat("Select Invoice, Customer, Date_Transaction, Terms_Code, Reference, Exchange_Curr, Batch_code from v_AR_Open_Items where Invoice = '",V.uGlobal.uReport(v.Local.iCount)!sInvoice.Trim,"'"," and Customer = '",V.uGlobal.uReport(v.Local.iCount)!sCustomer.Trim,"'",V.Local.sSql)
+
+F.Intrinsic.Control.For(V.Local.iCount,0,V.uGlobal.uCust.UBound,1)
+
+	Function.Intrinsic.String.Build("Select Invoice, Customer, Date_Transaction, Terms_Code, Reference, Exchange_Curr, Batch_Code, Exchange_Amt from V_AR_OPEN_ITEMS where Invoice = '{0}' and Customer = '{1}' ",Variable.uGlobal.uCust(Variable.Local.iCount)!sInvoice.Trim,Variable.uGlobal.uCust(Variable.Local.iCount)!sCust,Variable.Local.sSql)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,!=,True)
+'			V.uGlobal.uReport(v.Local.iCount)!dDate.Set(V.ODBC.conx!rst.FieldValTrim!Date_Transaction)
+'			V.uGlobal.uReport(v.Local.iCount)!sTerms.Set(V.ODBC.conx!rst.FieldValTrim!Terms_Code)
+'			V.uGlobal.uReport(v.Local.iCount)!sCurrency.Set(V.ODBC.conx!rst.fieldvalTrim!Exchange_Curr)
+'			V.uGlobal.uReport(v.Local.iCount)!sBatch.Set(V.ODBC.conx!rst.FieldValTrim!Batch_code)
+'		'they have multiple invoice numbers that are blank so i need to get all reference numbers for the blank invoice numbers.
+'		F.Intrinsic.Control.DoUntil(V.ODBC.conx!rst.EOF,=,True)
+'			F.Intrinsic.Control.If(V.Local.sRef,=,"")
+'				V.Local.sRef.Set(V.ODBC.conx!rst.FieldValTrim!Reference)
+'			F.Intrinsic.Control.Else
+'				F.Intrinsic.String.Concat(V.Local.sRef,", ",V.ODBC.conx!rst.FieldValTrim!Reference,V.Local.sRef)
+'			F.Intrinsic.Control.EndIf
+'			F.ODBC.conx!rst.MoveNext
+'		F.Intrinsic.Control.Loop
+'		V.uGlobal.uReport(v.Local.iCount)!sReference.Set(V.Local.sRef)
+
+		F.Intrinsic.Variable.LoadUDTFromRecordset("conx","rst","v.uGlobal.uReport",True)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.conx!rst.Close
+
+F.Intrinsic.Control.Next(V.Local.iCount)
+
+F.Intrinsic.Control.For(V.Local.iCount,0,V.uGlobal.uReport.UBound,1)
+
+	'Get Customer Information
+	F.Intrinsic.Control.If(V.uGlobal.uReport(v.Local.iCount)!sName,=,"")
+		F.Intrinsic.String.Concat("Select v_Customer_Master.Name_Customer, v_Customer_Master.Address1, v_Customer_Master.Address2, v_Customer_Master.City, v_Customer_Master.State, v_Customer_Master.Zip, v_Customer_Master.Attention,  v_Customer_Master.Telephone, v_Customer_Sales.Fax_Number From v_Customer_Master Left Join v_Customer_Sales on v_Customer_Master.Customer = v_Customer_Sales.Customer where v_Customer_Master.Customer = '",V.uGlobal.uReport(v.Local.iCount)!sCustomer.Trim,"'",V.Local.sSql)
+		F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+			'Would love a multi seek multi set function!
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sName,V.ODBC.conx!rst.FieldValTrim!Name_Customer)
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sAddress1,V.ODBC.conx!rst.FieldValTrim!Address1)
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sAddress2,V.ODBC.conx!rst.FieldValTrim!Address2)
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sCity,V.ODBC.conx!rst.FieldValTrim!City)
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sState,V.ODBC.conx!rst.FieldValTrim!State)
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sZip,V.ODBC.conx!rst.FieldValTrim!Zip)
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sPhone,V.ODBC.conx!rst.FieldValTrim!Telephone)
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sFax,V.ODBC.conx!rst.FieldValTrim!Fax_Number)
+			F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uReport!sCustomer,V.uGlobal.uReport(v.Local.iCount)!sCustomer,V.uGlobal.uReport!sAttn,V.ODBC.conx!rst.FieldValTrim!Attention)
+		F.Intrinsic.Control.EndIf
+			F.ODBC.conx!rst.Close
+	F.Intrinsic.Control.EndIf
+
+
+F.Intrinsic.Control.Next(V.Local.iCount)
+'Set UDT so that it can be saved to the BI table
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sInvoice,"Invoice")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sReference,"Reference")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!dDate,"Date")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sCustomer,"CustomerID")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!fOutstanding,"Outstanding")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sTerms,"Terms")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sCurrency,"Currency")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sName,"CustName")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sAddress1,"Address1")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sAddress2,"Address2")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sCity,"City")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sState,"State")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sZip,"Zip")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sAttn,"Attention")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sPhone,"Phone")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sFax,"Fax")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!sBatch,"Batch")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!fAmount,"InvoiceAmt")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!iBIRunID,"BIRunID")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!dAging,"AgingDate")
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uReport!dAging,V.Local.dDate)
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uReport!iBIRunID,V.Global.iBIRunID)
+
+F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uReport!dDate,1)
+
+'Save information to Table
+V.Local.sSql.Set("Select * From GCG_4141_ARNo0")
+F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst",V.Local.sSql)
+F.Intrinsic.Variable.SaveUDTToRecordset("conx","rst","v.uGlobal.uReport")
+F.ODBC.conx!rst.Close
+
+Function.Intrinsic.UI.CloseWaitDialog
+
+'Stop Logging
+F.Global.BI.StopLogging(V.Global.iBILogID)
+V.Local.sParam.Set("BIRUNID")
+V.Local.sVal.Set(V.Global.iBIRunID)
+'Print the Report
+F.Global.BI.RunReportPreProcessor(V.Global.iBIRunID,V.Global.iBILogID,V.Local.sParam,V.Local.sVal,"",-1,True,"",-1,"",-1,"","",V.Global.iBIRunID)
+F.Intrinsic.Control.CallSub(Form1_unload)
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdprint_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdprint_click.end
+
+Program.Sub.BuildStyle.Start
+F.Intrinsic.Control.SetErrorHandler("BuildStyle_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+Gui.Form1.gsfgCust.Rows(2)
+Gui.Form1.gsfgCust.FixedRows(1)
+Gui.Form1.gsfgCust.Cols(3)
+
+Gui.Form1.gsfgCust.SetColumnPercentages(".45:.45:.15")
+
+'Buildstyle
+'Column 0
+'Style 1
+Gui.Form1.gsfgCust.BuildStyle(1,0,"Type","Locked",True)
+Gui.Form1.gsfgCust.BuildStyle(1,0,"Fontstyle","Bold",True)
+Gui.Form1.gsfgCust.BuildStyle(1,0,"Format","Alignment",4)
+'Column 0
+'Style 2
+Gui.Form1.gsfgCust.BuildStyle(2,0,"Type","Locked",True)
+Gui.Form1.gsfgCust.BuildStyle(2,0,"Format","Alignment",2)
+'Column 0
+'Style 3
+Gui.Form1.gsfgCust.BuildStyle(3,0,"Type","Locked",True)
+
+'Column 1
+'Style 1
+Gui.Form1.gsfgCust.BuildStyle(1,1,"Type","Locked",True)
+Gui.Form1.gsfgCust.BuildStyle(1,1,"Fontstyle","Bold",True)
+Gui.Form1.gsfgCust.BuildStyle(1,1,"Format","Alignment",4)
+'Column 1
+'Style 2
+Gui.Form1.gsfgCust.BuildStyle(2,1,"Type","Locked",True)
+Gui.Form1.gsfgCust.BuildStyle(2,1,"Format","Alignment",2)
+'Column 1
+'Style 3
+Gui.Form1.gsfgCust.BuildStyle(3,1,"Type","Locked",True)
+
+'Column 2
+'Style 1
+Gui.Form1.gsfgCust.BuildStyle(1,2,"Type","Locked",True)
+Gui.Form1.gsfgCust.BuildStyle(1,2,"Fontstyle","Bold",True)
+Gui.Form1.gsfgCust.BuildStyle(1,2,"Format","Alignment",4)
+'Column 2
+'Style 2
+Gui.Form1.gsfgCust.BuildStyle(2,2,"Type","Command","Delete")
+Gui.Form1.gsfgCust.BuildStyle(2,2,"Format","Alignment",4)
+'Column 2
+'Style 3
+Gui.Form1.gsfgCust.BuildStyle(3,2,"Type","Locked",True)
+
+'Apply style to Row 0
+Gui.Form1.gsfgCust.ApplyStyle(0,1)
+'Apply style to Row 1
+Gui.Form1.gsfgCust.ApplyStyle(1,3)
+
+'Define Column Headers
+Gui.Form1.gsfgCust.TextMatrix(0,0,"Starting Customer")
+Gui.Form1.gsfgCust.TextMatrix(1,0,"Ending Customer")
+Gui.Form1.gsfgCust.TextMatrix(2,0,"")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("BuildStyle_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildStyle.End
+
+program.sub.gsfgcust_commandclick.start
+F.Intrinsic.Control.SetErrorHandler("gsfgcust_commandclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+V.Local.iRowCount.Declare(Long)
+V.Local.iRow.Declare(Long)
+'Delete the Row
+V.Local.iRowCount.Set(V.Screen.Form1!gsfgCust.Row)
+F.Intrinsic.Math.Sub(V.Local.iRowCount,1,V.Local.iRow)
+Gui.Form1.gsfgCust.DeleteRow(V.Local.iRow)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsfgcust_commandclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsfgcust_commandclick.end
+
+program.sub.form1_unload.start
+F.Intrinsic.Control.SetErrorHandler("form1_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+F.ODBC.Connection!conx.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("form1_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.form1_unload.end
+
+program.sub.chkall_click.start
+F.Intrinsic.Control.SetErrorHandler("chkall_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'If box is checked disable controls on screen else enable
+F.Intrinsic.Control.If(V.Screen.Form1!chkAll.Value,=,1)
+	Gui.Form1.txtStartCust.Enabled(False)
+	Gui.Form1.txtEndCust.Enabled(False)
+	Gui.Form1.gsfgCust.Visible(False)
+	Gui.Form1.cmdAdd.Enabled(False)
+	Gui.Form1.cmdStart.Enabled(False)
+	Gui.Form1.cmdEnd.Enabled(False)
+F.Intrinsic.Control.Else
+	Gui.Form1.txtStartCust.Enabled(True)
+	Gui.Form1.txtEndCust.Enabled(True)
+	Gui.Form1.gsfgCust.Visible(True)
+	Gui.Form1.cmdAdd.Enabled(True)
+	Gui.Form1.cmdStart.Enabled(True)
+	Gui.Form1.cmdEnd.Enabled(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("chkall_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4141_AR_NoZeroNet.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.chkall_click.end
+
+
